@@ -1,0 +1,14 @@
+__pycache__/
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+*.pyc
+.venv/
+
+# Live run outputs and model cache go to the bind-mounted CQ_DATA dir, never the repo.
+out/
+data/hf/
+*.log
+
+# The committed run of record lives in data/results/ (predictions grid + manifest +
+# macros) so reviewers can inspect or regenerate without a GPU; keep it tracked.
