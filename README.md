@@ -84,11 +84,11 @@ One command, no GPU, ~5 s — runs the real statistics pipeline (Wilson CIs, McN
 bootstrap, the saturated interaction, the model-clustered bootstrap, DerSimonian–Laird and
 Holm) and asserts the differential-erosion logic:
 ```bash
-uv run pytest tests/ -q
+./scripts/test.sh
 ```
-Expected: `15 passed`. This exercises that the interaction term is negative under genuine
-differential erosion and near zero under a uniform drop (the anti-trophy guarantee), and that
-the clustered/random-effects/Holm helpers behave.
+Docker (no GPU): `./scripts/test.sh --docker`. Expected: `15 passed`. This exercises that the
+interaction term is negative under genuine differential erosion and near zero under a uniform
+drop (the anti-trophy guarantee), and that the clustered/random-effects/Holm helpers behave.
 
 ## Experiments
 The MAIN claim is **C2 (differential erosion under int8)**. Default to the quick path; the
@@ -101,8 +101,9 @@ the paper uses (PILOT, E1, E2, E3, the localized/clustered/random-effects intera
 per-stratum and Holm-corrected numbers) from the committed per-item predictions in
 `data/results/grid/`, with zero hand-transcription:
 ```bash
-uv run python -m culturaquant.analyze --out-dir data/results/grid --macro-out /tmp/macros.tex --run-date 2026-06-07 && diff <(sort /tmp/macros.tex) <(sort data/results/results_macros.tex) && echo OK_MACROS_REPRODUCED
+./scripts/reproduce_macros.sh
 ```
+Docker (no GPU): `./scripts/reproduce_macros.sh --docker`.
 - **Expected time:** ~30 s. **Resources:** <1 GB RAM, no GPU.
 - **Expected result:** prints `OK_MACROS_REPRODUCED`; the regenerated macros are byte-identical
   to the committed `data/results/results_macros.tex`, including localized int8 interaction
