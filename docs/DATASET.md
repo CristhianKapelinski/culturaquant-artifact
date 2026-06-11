@@ -1,47 +1,59 @@
 # Dataset internals
 
-Complementary detail. The released probe is the C1 contribution of the paper.
+Complementary detail. The released probe is the central contribution of the paper.
 
 ## Item schema (JSONL, one object per line)
 
 ```json
-{"id": "reg-001", "stratum": "regional_facts", "region": "NE",
+{"id": "v2-mb-001", "set": "midband_br", "relation": "figure_to_state",
+ "qid": "Q65161183", "statement": "<Wikidata claim the item encodes>",
+ "source_url": "https://www.wikidata.org/wiki/Q65161183", "gold_verified": true,
+ "region": "N",
  "input": "<question in Brazilian Portuguese>",
  "alternatives": ["opt A", "opt B", "opt C", "opt D", "opt E"],
- "correct_index": 0}
+ "alt_qids": ["Q...", "..."], "correct_index": 0, "distractor_qids": ["..."],
+ "rarity": {"sitelinks": 2, "log_pageviews": 0.0, "band": "sl2-3"},
+ "stratum": "figure_to_state", "group": "cultural"}
 ```
 
-Every item is a single-correct 5-way MCQ, so the random floor is 0.20. Gold answers
-are author-fixed and never taken from a model under test.
+Every item is a single-correct 5-way MCQ, so the random floor is 0.20. Gold answers are
+verified against Wikidata (`gold_verified`) and never taken from a model under test. Each
+item carries its Wikidata QID and source URL for full provenance, and a `rarity` block
+(sitelink count, log pageviews, and the rarity band the item falls in).
 
 ## What ships in this repo
 
-| File | Group | Items | Strata | Regions | Notes |
-|---|---|---|---|---|---|
-| `data/cultural_strata.jsonl` | cultural | 70 | regional_facts 38, cuisine 20, geography 12 | N 15, NE 15, CO 13, SE 13, S 14 | Freshly authored to avoid BLUEX/ENEM contamination. |
-| `data/control_generic.jsonl` | control | 50 | generic | — | World geography/history/science, format-matched 5-way MCQ. |
+| File | Group | Items | Tagging | Notes |
+|---|---|---|---|---|
+| `v2/allband_predictions/cq_cult_items.jsonl` | cultural | 700 | macro-region + rarity band | Rare Brazilian facts drawn from Wikidata: which state a person was born in or a festival happens in. |
+| `v2/allband_predictions/cq_ctrl_items.jsonl` | control | 700 | country + rarity band, `matched_br_id` | Equally rare non-Brazilian facts, one paired to each cultural item on rarity. |
 
-These 120 author-written items are released under the repo's MIT license.
+Both files are released under the repo's MIT license. The cultural items span the five
+Brazilian macro-regions (N 105, NE 166, CO 113, SE 179, S 137) and seven Wikidata rarity
+bands (`sl0-1` 153, `sl2-3` 150, `sl4-7` 146, `sl8-15` 123, `sl16-30` 78, `sl31-50` 36,
+`sl51-80` 14). The control draws mostly from a few European and South American countries
+(Spain, Germany, the United Kingdom, Argentina, Italy).
 
-## What is NOT redistributed
+## The rarity-matched control
 
-The proverbs stratum is **not** shipped as data. BRoverbs has no dataset license on
-the Hub (the card shows license "coming soon"), so the loader pulls it from the
-HuggingFace Hub at runtime (`Tropic-AI/BRoverbs`, `proverb_to_history` split) and
-subsamples deterministically (seed `20260607`). Only the stratum/region tag and the
-item id are author-owned. Set `--n-proverbs 0` to run without any Hub access.
+Each cultural item is paired with a non-Brazilian item of comparable rarity, linked by
+`matched_br_id` on the control side (the control item's `matched_br_id` is the cultural
+item's `id`). Rarity is proxied by Wikidata sitelink count and pageviews, not measured
+corpus frequency, which no public tool gives for these models; residual frequency
+differences are a stated limitation. Because the two groups are matched on rarity, a
+difference in erosion between them reflects cultural content rather than rarity.
 
 ## Macro-region balance
 
-The cultural strata are tagged by Brazilian macro-region (N, NE, CO, SE, S). The
-pre-registered coarse contrast is N+NE vs SE+S; the Centro-Oeste (CO) items are
-reported but held out of the coarse split because finer per-region claims are
-underpowered at ~13–15 items/region (E3 in the paper).
+The cultural items are tagged by Brazilian macro-region (N, NE, CO, SE, S). They are not
+evenly spread (Southeast and Northeast dominate, Centro-Oeste is the smallest), so the
+paper reports a coarse North-plus-Northeast vs Southeast-plus-South contrast rather than
+per-region claims, which are underpowered at a few dozen items per region.
 
 ## Honest scope of the released probe
 
-The probe is the first Brazilian state-level cultural-knowledge MCQ probe with a
-matched generic control. It is **not** yet inter-annotator validated nor
-leakage-audited against an exact-count index; both are stated as future work in the
-paper and are not claimed here. The freshly-authored items reduce, but do not prove
+The probe is a Brazilian state-level cultural-knowledge MCQ probe with an item-by-item
+rarity-matched generic control. It is **not** yet inter-annotator validated nor
+leakage-audited against an exact-count frequency index; both are stated as future work in
+the paper and are not claimed here. Wikidata gold verification reduces, but does not prove
 the absence of, pretraining leakage.
