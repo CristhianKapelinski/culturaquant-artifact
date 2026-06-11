@@ -13,16 +13,25 @@ dependencies = [
     "datasets>=2.20,<4.2",
     "numpy>=1.26,<2.3",
     "sentencepiece>=0.2,<0.3",
+    "rank-bm25>=0.2.2,<0.3",
 ]
 
 [project.scripts]
 culturaquant-run = "culturaquant.run:main"
 culturaquant-analyze = "culturaquant.analyze:main"
+culturaquant-run-gate = "culturaquant.run_gate:main"
+culturaquant-analyze-gate = "culturaquant.analyze_gate:main"
 
 [project.optional-dependencies]
 dev = [
     "pytest>=8,<9",
     "ruff>=0.6,<0.13",
+]
+# Optional dense retriever (wave-2 robustness; bge-m3 + FAISS). Import-guarded so
+# the headline BM25 path never needs these.
+dense = [
+    "faiss-cpu>=1.8,<1.13",
+    "sentence-transformers>=3.0,<6",
 ]
 
 [build-system]
@@ -34,3 +43,10 @@ packages = ["src/culturaquant"]
 
 [tool.ruff]
 line-length = 100
+
+# The packaged tool (src/) and its tests are linted strictly. The reproducibility and
+# data-build scripts under v2/ and scripts/ are deliberately compact single-file analyses;
+# relax only the statement-style and defensive-parsing rules there, never the bug-catching ones.
+[tool.ruff.lint.per-file-ignores]
+"v2/**" = ["E701", "E702", "E703", "E722", "E402", "E731", "E741"]
+"scripts/**" = ["E701", "E702", "E703", "E722", "E402", "E731", "E741"]

@@ -1,0 +1,93 @@
+{
+  "reference_machine": {
+    "platform": "Linux-7.0.0-22-generic-x86_64-with-glibc2.35",
+    "python": "3.11.0rc1",
+    "gpu": "NVIDIA GeForce RTX 5080",
+    "cuda": "12.8",
+    "torch": "2.8.0+cu128"
+  },
+  "n_items": 128,
+  "results": [
+    {
+      "_summary": true,
+      "model": "TucanoBR/Tucano-2b4",
+      "precision": "fp16",
+      "n_items": 128,
+      "n_instances": 640,
+      "pos_counts": [
+        0,
+        82,
+        0,
+        558,
+        0
+      ],
+      "pos_prob": [
+        0.0,
+        0.12812,
+        0.0,
+        0.87187,
+        0.0
+      ],
+      "rstd": 0.33958,
+      "favored_position": "D",
+      "favored_rate": 0.87187,
+      "accuracy": 0.20938,
+      "seconds": 37.5,
+      "status": "done"
+    },
+    {
+      "_summary": true,
+      "model": "TucanoBR/Tucano-2b4",
+      "precision": "int8",
+      "n_items": 128,
+      "n_instances": 640,
+      "pos_counts": [
+        0,
+        76,
+        0,
+        564,
+        0
+      ],
+      "pos_prob": [
+        0.0,
+        0.11875,
+        0.0,
+        0.88125,
+        0.0
+      ],
+      "rstd": 0.34372,
+      "favored_position": "D",
+      "favored_rate": 0.88125,
+      "accuracy": 0.21406,
+      "seconds": 121.7,
+      "status": "done"
+    },
+    {
+      "_summary": true,
+      "model": "TucanoBR/Tucano-2b4",
+      "precision": "nf4",
+      "n_items": 128,
+      "n_instances": 640,
+      "pos_counts": [
+        3,
+        553,
+        3,
+        81,
+        0
+      ],
+      "pos_prob": [
+        0.00469,
+        0.86406,
+        0.00469,
+        0.12656,
+        0.0
+      ],
+      "rstd": 0.33546,
+      "favored_position": "B",
+      "favored_rate": 0.86406,
+      "accuracy": 0.19062,
+      "seconds": 52.7,
+      "status": "done"
+    }
+  ]
+}

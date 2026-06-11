@@ -1,0 +1,155 @@
+{
+  "models": {
+    "Qwen__Qwen2.5-7B-Instruct": {
+      "name": "Qwen2.5-7B",
+      "cult_fp16": 48.0,
+      "ctrl_fp16": 35.3,
+      "cult_fp16_A": 72.7,
+      "ctrl_fp16_A": 55.5,
+      "rstd_cult_fp16": 0.117,
+      "cult_int8": 49.8,
+      "ctrl_int8": 35.2,
+      "cult_int8_A": 73.4,
+      "ctrl_int8_A": 56.2,
+      "rstd_cult_int8": 0.114,
+      "cult_nf4": 47.2,
+      "ctrl_nf4": 37.0,
+      "cult_nf4_A": 66.4,
+      "ctrl_nf4_A": 53.1,
+      "rstd_cult_nf4": 0.092,
+      "diff_int8": [
+        -2.0,
+        -4.5,
+        0.5
+      ],
+      "diff_int8_A": [
+        0.0,
+        -7.0,
+        7.0
+      ],
+      "diff_nf4": [
+        2.5,
+        -2.0,
+        7.0
+      ],
+      "diff_nf4_A": [
+        3.9,
+        -5.5,
+        13.3
+      ]
+    },
+    "mistralai__Mistral-7B-Instruct-v0.3": {
+      "name": "Mistral-7B",
+      "cult_fp16": 37.5,
+      "ctrl_fp16": 40.3,
+      "cult_fp16_A": 39.1,
+      "ctrl_fp16_A": 37.5,
+      "rstd_cult_fp16": 0.049,
+      "cult_int8": 37.8,
+      "ctrl_int8": 38.3,
+      "cult_int8_A": 40.6,
+      "ctrl_int8_A": 39.1,
+      "rstd_cult_int8": 0.054,
+      "cult_nf4": 37.0,
+      "ctrl_nf4": 39.2,
+      "cult_nf4_A": 32.8,
+      "ctrl_nf4_A": 35.9,
+      "rstd_cult_nf4": 0.036,
+      "diff_int8": [
+        -2.3,
+        -4.8,
+        0.0
+      ],
+      "diff_int8_A": [
+        0.0,
+        -5.5,
+        5.5
+      ],
+      "diff_nf4": [
+        -0.6,
+        -4.8,
+        3.6
+      ],
+      "diff_nf4_A": [
+        4.7,
+        -2.3,
+        11.7
+      ]
+    },
+    "microsoft__Phi-3.5-mini-instruct": {
+      "name": "Phi-3.5-mini",
+      "cult_fp16": 40.2,
+      "ctrl_fp16": 28.6,
+      "cult_fp16_A": 28.9,
+      "ctrl_fp16_A": 18.0,
+      "rstd_cult_fp16": 0.136,
+      "cult_int8": 39.4,
+      "ctrl_int8": 29.7,
+      "cult_int8_A": 23.4,
+      "ctrl_int8_A": 14.8,
+      "rstd_cult_int8": 0.14,
+      "cult_nf4": 33.4,
+      "ctrl_nf4": 26.1,
+      "cult_nf4_A": 17.2,
+      "ctrl_nf4_A": 12.5,
+      "rstd_cult_nf4": 0.153,
+      "diff_int8": [
+        1.9,
+        -2.5,
+        6.2
+      ],
+      "diff_int8_A": [
+        2.3,
+        -3.9,
+        9.4
+      ],
+      "diff_nf4": [
+        4.2,
+        -0.8,
+        9.5
+      ],
+      "diff_nf4_A": [
+        6.2,
+        -0.8,
+        13.3
+      ]
+    }
+  },
+  "pooled": {
+    "int8": -0.8,
+    "int8_A": 0.8,
+    "nf4": 2.0,
+    "nf4_A": 4.9
+  },
+  "calib": {
+    "sl0-1": [
+      0.234,
+      765
+    ],
+    "sl2-3": [
+      0.2133,
+      750
+    ],
+    "sl4-7": [
+      0.3014,
+      730
+    ],
+    "sl8-15": [
+      0.3366,
+      615
+    ],
+    "sl16-30": [
+      0.4333,
+      390
+    ],
+    "sl31-50": [
+      0.5056,
+      180
+    ],
+    "sl51-80": [
+      0.6,
+      70
+    ]
+  },
+  "ablation": {}
+}

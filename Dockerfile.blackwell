@@ -1,0 +1,32 @@
+# Blackwell (sm_120) variant: CUDA 12.8 runtime base so bitsandbytes 0.48.x
+# sm_120 int8/nf4 kernels load against a matching system CUDA runtime. torch is
+# the same cu128 wheel pinned in uv.lock; only the base CUDA libs differ from the
+# Ampere image. Used on the RTX 5080 / 5060 Ti hosts; the grid code is identical.
+FROM nvidia/cuda:12.8.1-cudnn-runtime-ubuntu22.04
+
+ENV DEBIAN_FRONTEND=noninteractive \
+    PYTHONUNBUFFERED=1 \
+    PIP_NO_CACHE_DIR=1 \
+    UV_SYSTEM_PYTHON=1 \
+    HF_HOME=/data/hf \
+    TRANSFORMERS_NO_ADVISORY_WARNINGS=1
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+        python3.11 python3.11-venv python3.11-dev python3-pip git curl ca-certificates \
+    && rm -rf /var/lib/apt/lists/* \
+    && update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.11 1
+
+COPY --from=ghcr.io/astral-sh/uv:0.11.2 /uv /usr/local/bin/uv
+
+WORKDIR /app
+COPY pyproject.toml uv.lock README.md ./
+COPY src ./src
+COPY data ./data
+COPY tests ./tests
+COPY scripts ./scripts
+COPY docs ./docs
+
+RUN uv sync --extra dev --frozen || uv sync --extra dev
+
+ENTRYPOINT ["uv", "run"]
+CMD ["python", "-c", "import torch; print('torch', torch.__version__, 'cuda', torch.cuda.is_available())"]

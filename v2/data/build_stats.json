@@ -1,0 +1,48 @@
+{
+  "br_candidates": 1370,
+  "br_verified": 400,
+  "br_dropped": 0,
+  "br_dropped_qids": [],
+  "br_final": 400,
+  "control_candidates": 596,
+  "control_verified_candidates": 596,
+  "control_final": 400,
+  "br_paired": 400,
+  "br_per_region": {
+    "N": 80,
+    "NE": 80,
+    "CO": 80,
+    "SE": 80,
+    "S": 80
+  },
+  "br_per_relation": {
+    "festival_to_state": 16,
+    "figure_to_state": 384
+  },
+  "control_per_country": {
+    "França": 111,
+    "Espanha": 97,
+    "Argentina": 28,
+    "Alemanha": 80,
+    "Reino Unido": 45,
+    "Itália": 39
+  },
+  "control_per_relation": {
+    "festival_to_admin": 2,
+    "figure_to_admin": 398
+  },
+  "br_gold_pos": {
+    "A": 80,
+    "B": 80,
+    "C": 80,
+    "D": 80,
+    "E": 80
+  },
+  "control_gold_pos": {
+    "A": 80,
+    "B": 80,
+    "C": 80,
+    "D": 80,
+    "E": 80
+  }
+}

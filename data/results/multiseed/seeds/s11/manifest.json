@@ -1,0 +1,217 @@
+{
+  "seed": 11,
+  "n_items": 200,
+  "n_proverbs": null,
+  "scoring": "perm_options_v2",
+  "models": [
+    "Qwen/Qwen2.5-3B-Instruct",
+    "Qwen/Qwen3-4B",
+    "TucanoBR/Tucano-1b1",
+    "TucanoBR/Tucano-2b4",
+    "Qwen/Qwen2.5-0.5B-Instruct",
+    "Qwen/Qwen2.5-1.5B-Instruct",
+    "Qwen/Qwen3-0.6B",
+    "Qwen/Qwen3-1.7B"
+  ],
+  "precisions": [
+    "fp16",
+    "int8",
+    "nf4"
+  ],
+  "reference_machine": {
+    "gpu": "?",
+    "cuda": "?",
+    "torch": "?"
+  },
+  "runs": [
+    {
+      "model": "Qwen/Qwen2.5-3B-Instruct",
+      "precision": "fp16",
+      "preds_file": "preds__Qwen__Qwen2.5-3B-Instruct__fp16.jsonl",
+      "n": 200,
+      "acc": 0.65
+    },
+    {
+      "model": "Qwen/Qwen2.5-3B-Instruct",
+      "precision": "int8",
+      "preds_file": "preds__Qwen__Qwen2.5-3B-Instruct__int8.jsonl",
+      "n": 200,
+      "acc": 0.68
+    },
+    {
+      "model": "Qwen/Qwen2.5-3B-Instruct",
+      "precision": "nf4",
+      "preds_file": "preds__Qwen__Qwen2.5-3B-Instruct__nf4.jsonl",
+      "n": 200,
+      "acc": 0.64
+    },
+    {
+      "model": "Qwen/Qwen3-4B",
+      "precision": "fp16",
+      "preds_file": "preds__Qwen__Qwen3-4B__fp16.jsonl",
+      "n": 200,
+      "acc": 0.685
+    },
+    {
+      "model": "Qwen/Qwen3-4B",
+      "precision": "int8",
+      "preds_file": "preds__Qwen__Qwen3-4B__int8.jsonl",
+      "n": 200,
+      "acc": 0.675
+    },
+    {
+      "model": "Qwen/Qwen3-4B",
+      "precision": "nf4",
+      "preds_file": "preds__Qwen__Qwen3-4B__nf4.jsonl",
+      "n": 200,
+      "acc": 0.61
+    },
+    {
+      "model": "TucanoBR/Tucano-1b1",
+      "precision": "fp16",
+      "preds_file": "preds__TucanoBR__Tucano-1b1__fp16.jsonl",
+      "n": 200,
+      "acc": 0.245
+    },
+    {
+      "model": "TucanoBR/Tucano-1b1",
+      "precision": "int8",
+      "preds_file": "preds__TucanoBR__Tucano-1b1__int8.jsonl",
+      "n": 200,
+      "acc": 0.27
+    },
+    {
+      "model": "TucanoBR/Tucano-1b1",
+      "precision": "nf4",
+      "preds_file": "preds__TucanoBR__Tucano-1b1__nf4.jsonl",
+      "n": 200,
+      "acc": 0.235
+    },
+    {
+      "model": "TucanoBR/Tucano-2b4",
+      "precision": "fp16",
+      "preds_file": "preds__TucanoBR__Tucano-2b4__fp16.jsonl",
+      "n": 200,
+      "acc": 0.18
+    },
+    {
+      "model": "TucanoBR/Tucano-2b4",
+      "precision": "int8",
+      "preds_file": "preds__TucanoBR__Tucano-2b4__int8.jsonl",
+      "n": 200,
+      "acc": 0.16
+    },
+    {
+      "model": "TucanoBR/Tucano-2b4",
+      "precision": "nf4",
+      "preds_file": "preds__TucanoBR__Tucano-2b4__nf4.jsonl",
+      "n": 200,
+      "acc": 0.135
+    },
+    {
+      "model": "Qwen/Qwen2.5-0.5B-Instruct",
+      "precision": "fp16",
+      "preds_file": "preds__Qwen__Qwen2.5-0.5B-Instruct__fp16.jsonl",
+      "n": 200,
+      "acc": 0.34
+    },
+    {
+      "model": "Qwen/Qwen2.5-0.5B-Instruct",
+      "precision": "int8",
+      "preds_file": "preds__Qwen__Qwen2.5-0.5B-Instruct__int8.jsonl",
+      "n": 200,
+      "acc": 0.315
+    },
+    {
+      "model": "Qwen/Qwen2.5-0.5B-Instruct",
+      "precision": "nf4",
+      "preds_file": "preds__Qwen__Qwen2.5-0.5B-Instruct__nf4.jsonl",
+      "n": 200,
+      "acc": 0.32
+    },
+    {
+      "model": "Qwen/Qwen2.5-1.5B-Instruct",
+      "precision": "fp16",
+      "preds_file": "preds__Qwen__Qwen2.5-1.5B-Instruct__fp16.jsonl",
+      "n": 200,
+      "acc": 0.595
+    },
+    {
+      "model": "Qwen/Qwen2.5-1.5B-Instruct",
+      "precision": "int8",
+      "preds_file": "preds__Qwen__Qwen2.5-1.5B-Instruct__int8.jsonl",
+      "n": 200,
+      "acc": 0.595
+    },
+    {
+      "model": "Qwen/Qwen2.5-1.5B-Instruct",
+      "precision": "nf4",
+      "preds_file": "preds__Qwen__Qwen2.5-1.5B-Instruct__nf4.jsonl",
+      "n": 200,
+      "acc": 0.49
+    },
+    {
+      "model": "Qwen/Qwen3-0.6B",
+      "precision": "fp16",
+      "preds_file": "preds__Qwen__Qwen3-0.6B__fp16.jsonl",
+      "n": 200,
+      "acc": 0.345
+    },
+    {
+      "model": "Qwen/Qwen3-0.6B",
+      "precision": "int8",
+      "preds_file": "preds__Qwen__Qwen3-0.6B__int8.jsonl",
+      "n": 200,
+      "acc": 0.3
+    },
+    {
+      "model": "Qwen/Qwen3-0.6B",
+      "precision": "nf4",
+      "preds_file": "preds__Qwen__Qwen3-0.6B__nf4.jsonl",
+      "n": 200,
+      "acc": 0.22
+    },
+    {
+      "model": "Qwen/Qwen3-1.7B",
+      "precision": "fp16",
+      "preds_file": "preds__Qwen__Qwen3-1.7B__fp16.jsonl",
+      "n": 200,
+      "acc": 0.535
+    },
+    {
+      "model": "Qwen/Qwen3-1.7B",
+      "precision": "int8",
+      "preds_file": "preds__Qwen__Qwen3-1.7B__int8.jsonl",
+      "n": 200,
+      "acc": 0.54
+    },
+    {
+      "model": "Qwen/Qwen3-1.7B",
+      "precision": "nf4",
+      "preds_file": "preds__Qwen__Qwen3-1.7B__nf4.jsonl",
+      "n": 200,
+      "acc": 0.46
+    }
+  ],
+  "item_strata": {
+    "by_group": {
+      "cultural": 150,
+      "control": 50
+    },
+    "by_stratum": {
+      "regional_facts": 38,
+      "cuisine": 20,
+      "geography": 12,
+      "generic": 50,
+      "proverbs": 80
+    },
+    "by_region": {
+      "NE": 15,
+      "N": 15,
+      "CO": 13,
+      "SE": 13,
+      "S": 14,
+      "-": 80
+    }
+  }
+}

@@ -10,5 +10,10 @@ out/
 data/hf/
 *.log
 
-# The committed run of record lives in data/results/ (predictions grid + manifest +
-# macros) so reviewers can inspect or regenerate without a GPU; keep it tracked.
+# Upstream data-build cache (raw Wikidata SPARQL + pageviews responses, re-fetchable via
+# v2/build/fetch.py). A build cache, not a result; never committed.
+v2/cache/
+
+# The committed run of record lives in v2/allband_predictions/ (the all-band 11-model
+# per-item predictions + item metadata) with analysis in v2/build/ and reference macros in
+# v2/allband/, so reviewers can regenerate every paper number without a GPU; keep it tracked.

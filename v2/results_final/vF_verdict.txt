@@ -1,0 +1,47 @@
+   Building culturaquant @ file:///app
+      Built culturaquant @ file:///app
+Uninstalled 1 package in 0.33ms
+Installed 1 package in 0.57ms
+==============================================================================
+CulturaQuant-v2 — erosion & differential erosion (cyclic, rarity-matched)
+==============================================================================
+
+### Qwen/Qwen2.5-7B-Instruct
+  cultural fp16 acc= 48.0  (n_inst=640, items=128)
+  control  fp16 acc= 35.3  (n_inst=640, items=128)
+  [int8] cult_erosion= -1.9pp (McNemar p=0.074, b/c=13/25)  ctrl_erosion= +0.2pp (p=1.000, b/c=14/13)
+        DIFFERENTIAL delta= -2.0pp  95%CI[ -4.5, +0.5]  paired-MDE~2.7pp
+        per-band cult erosion: sl16-30:-1pp(n78)  sl31-50:-4pp(n36)  sl51-80:+0pp(n14)
+  [nf4] cult_erosion= +0.8pp (McNemar p=0.649, b/c=41/36)  ctrl_erosion= -1.7pp (p=0.235, b/c=30/41)
+        DIFFERENTIAL delta= +2.5pp  95%CI[ -2.0, +7.0]  paired-MDE~3.8pp
+        per-band cult erosion: sl16-30:+0pp(n78)  sl31-50:+1pp(n36)  sl51-80:+6pp(n14)
+
+### mistralai/Mistral-7B-Instruct-v0.3
+  cultural fp16 acc= 37.5  (n_inst=640, items=128)
+  control  fp16 acc= 40.3  (n_inst=640, items=128)
+  [int8] cult_erosion= -0.3pp (McNemar p=0.845, b/c=12/14)  ctrl_erosion= +2.0pp (p=0.037, b/c=23/10)
+        DIFFERENTIAL delta= -2.3pp  95%CI[ -4.7, -0.2]  paired-MDE~2.2pp
+        per-band cult erosion: sl16-30:-1pp(n78)  sl31-50:+1pp(n36)  sl51-80:+1pp(n14)
+  [nf4] cult_erosion= +0.5pp (McNemar p=0.779, b/c=27/24)  ctrl_erosion= +1.1pp (p=0.450, b/c=35/28)
+        DIFFERENTIAL delta= -0.6pp  95%CI[ -4.8, +3.8]  paired-MDE~3.1pp
+        per-band cult erosion: sl16-30:-1pp(n78)  sl31-50:+3pp(n36)  sl51-80:+1pp(n14)
+
+### microsoft/Phi-3.5-mini-instruct
+  cultural fp16 acc= 40.2  (n_inst=640, items=128)
+  control  fp16 acc= 28.6  (n_inst=640, items=128)
+  [int8] cult_erosion= +0.8pp (McNemar p=0.668, b/c=46/41)  ctrl_erosion= -1.1pp (p=0.450, b/c=28/35)
+        DIFFERENTIAL delta= +1.9pp  95%CI[ -2.5, +6.6]  paired-MDE~4.1pp
+        per-band cult erosion: sl16-30:+3pp(n78)  sl31-50:-1pp(n36)  sl51-80:-6pp(n14)
+  [nf4] cult_erosion= +6.7pp (McNemar p=0.000, b/c=74/31)  ctrl_erosion= +2.5pp (p=0.081, b/c=45/29)
+        DIFFERENTIAL delta= +4.2pp  95%CI[ -0.8, +9.2]  paired-MDE~4.5pp
+        per-band cult erosion: sl16-30:+8pp(n78)  sl31-50:+6pp(n36)  sl51-80:+1pp(n14)
+
+==============================================================================
+MODEL-POOLED differential erosion (mean over models)
+  int8: mean delta = -0.8pp over 3 models  (per-model: [-2.0, -2.3, 1.9])
+  nf4: mean delta = +2.0pp over 3 models  (per-model: [2.5, -0.6, 4.2])
+
+[verdict] delta<0 & CI excludes 0 => rare BR culture erodes MORE than equally-rare
+          generic (thesis). CI includes 0 with small MDE => conclusive NULL
+          (int8/nf4 culturally safe; degradation is frequency-, not culture-driven).
+VERDICT WRITTEN Tue Jun  9 02:25:01 PM UTC 2026

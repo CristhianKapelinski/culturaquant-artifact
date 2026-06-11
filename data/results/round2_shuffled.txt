@@ -1,0 +1,38 @@
+=== HEADLINE CLUSTERED INTERACTION (model-clustered bootstrap) ===
+  int8: interaction=-0.206  95% CI [-0.695, 0.089]
+    DL random-effects: -0.074 [-0.282, 0.134] tau2=0.031
+  nf4: interaction=0.214  95% CI [-0.407, 0.717]
+    DL random-effects: 0.269 [-0.264, 0.802] tau2=0.153
+
+=== LOCALIZED-ONLY (freshly-authored items) int8 ===
+  n localized ids = 70
+  int8 localized clustered interaction=-0.057 [-0.229, 0.114]
+
+=== PER-MODEL int8 interaction ===
+  Qwen2.5-1.5B-Instruct: 0.159
+  Qwen2.5-3B-Instruct: -0.763
+  Qwen3-0.6B: 0.000
+  Qwen3-1.7B: -0.480
+  Qwen3-4B: -0.027
+
+=== McNEMAR FAMILY + HOLM CORRECTION ===
+  QwenThreeZeroSixB/nf4/control                  p=0.0002  p_holm=0.0044  <-- survives Holm (b=19,c=2)
+  QwenThreeFourB/nf4/cultural                    p=0.0169  p_holm=0.3211 (b=17,c=5)
+  QwenThreeZeroSixB/nf4/cultural                 p=0.0433  p_holm=0.7791 (b=18,c=7)
+  QwenThreeOneSevenB/int8/cultural               p=0.0574  p_holm=0.9753 (b=11,c=3)
+  QwenTwoFiveThreeBInstruct/int8/control         p=0.0625  p_holm=1.0000 (b=0,c=5)
+  QwenTwoFiveOneFiveBInstruct/nf4/cultural       p=0.0895  p_holm=1.0000 (b=23,c=12)
+  QwenTwoFiveOneFiveBInstruct/int8/cultural      p=0.1460  p_holm=1.0000 (b=3,c=9)
+  QwenThreeOneSevenB/nf4/cultural                p=0.1686  p_holm=1.0000 (b=17,c=9)
+  QwenThreeOneSevenB/int8/control                p=0.5000  p_holm=1.0000 (b=0,c=2)
+  QwenThreeOneSevenB/nf4/control                 p=0.6875  p_holm=1.0000 (b=4,c=2)
+  QwenTwoFiveThreeBInstruct/nf4/control          p=0.7266  p_holm=1.0000 (b=3,c=5)
+  QwenTwoFiveThreeBInstruct/nf4/cultural         p=0.7905  p_holm=1.0000 (b=6,c=8)
+  QwenTwoFiveOneFiveBInstruct/int8/control       p=1.0000  p_holm=1.0000 (b=0,c=0)
+  QwenTwoFiveOneFiveBInstruct/nf4/control        p=1.0000  p_holm=1.0000 (b=3,c=2)
+  QwenTwoFiveThreeBInstruct/int8/cultural        p=1.0000  p_holm=1.0000 (b=9,c=9)
+  QwenThreeZeroSixB/int8/cultural                p=1.0000  p_holm=1.0000 (b=5,c=5)
+  QwenThreeZeroSixB/int8/control                 p=1.0000  p_holm=1.0000 (b=1,c=1)
+  QwenThreeFourB/int8/cultural                   p=1.0000  p_holm=1.0000 (b=4,c=3)
+  QwenThreeFourB/int8/control                    p=1.0000  p_holm=1.0000 (b=0,c=0)
+  QwenThreeFourB/nf4/control                     p=1.0000  p_holm=1.0000 (b=1,c=0)

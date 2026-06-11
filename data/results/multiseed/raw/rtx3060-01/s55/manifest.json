@@ -1,0 +1,45 @@
+{
+  "seed": 55,
+  "n_items": 200,
+  "n_proverbs": null,
+  "scoring": "perm_options_v2",
+  "models": [
+    "Qwen/Qwen2.5-0.5B-Instruct"
+  ],
+  "precisions": [
+    "fp16"
+  ],
+  "reference_machine": {
+    "gpu": "?",
+    "cuda": "?",
+    "torch": "?"
+  },
+  "runs": [
+    {
+      "model": "Qwen/Qwen2.5-0.5B-Instruct",
+      "precision": "fp16",
+      "preds_file": "preds__Qwen__Qwen2.5-0.5B-Instruct__fp16.jsonl"
+    }
+  ],
+  "item_strata": {
+    "by_group": {
+      "cultural": 150,
+      "control": 50
+    },
+    "by_stratum": {
+      "regional_facts": 38,
+      "cuisine": 20,
+      "geography": 12,
+      "generic": 50,
+      "proverbs": 80
+    },
+    "by_region": {
+      "NE": 15,
+      "N": 15,
+      "CO": 13,
+      "SE": 13,
+      "S": 14,
+      "-": 80
+    }
+  }
+}

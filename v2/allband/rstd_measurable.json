@@ -1,0 +1,19 @@
+{
+  "_provenance": "Position-choice spread (RStd) for the 6 measurable models, computed by build/cq_rstd.py over the all-band cultural runs (~/cq_data/out/vAgrid_cult). RStd is the population standard deviation across the five answer positions of the fraction of items for which each position was chosen; 0 = uniform chooser. 700 items x 5 cyclic rotations = 3500 instances per model/precision.",
+  "n_items": 700,
+  "n_instances_per_cell": 3500,
+  "measurable": {
+    "Qwen2.5-1.5B-Instruct": {"fp16": 0.198, "nf4": 0.139},
+    "Qwen2.5-3B-Instruct":   {"fp16": 0.192, "nf4": 0.204},
+    "Qwen2.5-7B-Instruct":   {"fp16": 0.146, "nf4": 0.132},
+    "Qwen3-1.7B":            {"fp16": 0.127, "nf4": 0.327},
+    "Qwen3-4B":              {"fp16": 0.120, "nf4": 0.152},
+    "Phi-3.5-mini-instruct": {"fp16": 0.187, "nf4": 0.197}
+  },
+  "summary": {
+    "fp16_rstd_lo": 0.12,
+    "fp16_rstd_hi": 0.20,
+    "nf4_rstd_high_model": "Qwen3-1.7B",
+    "nf4_rstd_high": 0.33
+  }
+}

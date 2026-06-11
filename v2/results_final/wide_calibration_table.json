@@ -1,0 +1,50 @@
+{
+  "reference_machine": {
+    "platform": "Linux-7.0.0-22-generic-x86_64-with-glibc2.35",
+    "python": "3.11.0rc1",
+    "gpu": "NVIDIA GeForce RTX 5080",
+    "cuda": "12.8",
+    "torch": "2.8.0+cu128"
+  },
+  "n_items": 700,
+  "results": [
+    {
+      "model": "Qwen/Qwen2.5-7B-Instruct",
+      "precision": "fp16",
+      "overall_acc": 0.3051,
+      "n": 3500,
+      "per_bucket_acc": {
+        "sl0-1": [
+          0.234,
+          765
+        ],
+        "sl2-3": [
+          0.2133,
+          750
+        ],
+        "sl4-7": [
+          0.3014,
+          730
+        ],
+        "sl8-15": [
+          0.3366,
+          615
+        ],
+        "sl16-30": [
+          0.4333,
+          390
+        ],
+        "sl31-50": [
+          0.5056,
+          180
+        ],
+        "sl51-80": [
+          0.6,
+          70
+        ]
+      },
+      "seconds": 424.6,
+      "status": "done"
+    }
+  ]
+}

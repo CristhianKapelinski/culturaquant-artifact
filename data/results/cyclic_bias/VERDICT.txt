@@ -1,0 +1,134 @@
+==============================================================================
+CYCLIC-ROTATION POSITION-BIAS: RStd table (std of chosen-position probs)
+  0 = perfectly uniform/unbiased ; higher = more position concentration
+==============================================================================
+model                                fp16             int8              nf4
+Qwen2.5-0.5B-Instruct          0.150 C46%       0.138 C44%       0.032 B26%
+Qwen2.5-1.5B-Instruct          0.038 C25%       0.038 C24%       0.066 D31%
+Qwen2.5-3B-Instruct            0.105 A39%       0.038 A27%       0.064 A31%
+Qwen3-0.6B                     0.276 A75%       0.285 A77%       0.394 A99%
+Qwen3-1.7B                     0.096 A36%       0.095 A35%       0.173 A54%
+Qwen3-4B                       0.042 A27%       0.043 A27%       0.046 A28%
+
+accuracy (avg over rotations):
+model                                fp16             int8              nf4
+Qwen2.5-0.5B-Instruct               0.380            0.388            0.313
+Qwen2.5-1.5B-Instruct               0.713            0.713            0.630
+Qwen2.5-3B-Instruct                 0.690            0.773            0.715
+Qwen3-0.6B                          0.357            0.355            0.207
+Qwen3-1.7B                          0.597            0.593            0.525
+Qwen3-4B                            0.758            0.740            0.723
+
+==============================================================================
+HYPOTHESIS TEST: does quantization INCREASE RStd vs fp16?
+==============================================================================
+
+--- nf4 vs fp16  (n=6 models) ---
+  Qwen2.5-0.5B-Instruct    fp16=0.150 nf4=0.032  delta=-0.119  decrease
+  Qwen2.5-1.5B-Instruct    fp16=0.038 nf4=0.066  delta=+0.027  INCREASE
+  Qwen2.5-3B-Instruct      fp16=0.105 nf4=0.064  delta=-0.041  decrease
+  Qwen3-0.6B               fp16=0.276 nf4=0.394  delta=+0.118  INCREASE
+  Qwen3-1.7B               fp16=0.096 nf4=0.173  delta=+0.076  INCREASE
+  Qwen3-4B                 fp16=0.042 nf4=0.046  delta=+0.004  INCREASE
+  increased(+)=4  decreased(-)=2  mean delta=+0.0111
+  sign test (two-sided) p=0.6875   Wilcoxon z=-0.31 p~=0.7532
+  -> consistent increase? NO ; statistically significant increase? NO
+
+--- int8 vs fp16  (n=6 models) ---
+  Qwen2.5-0.5B-Instruct    fp16=0.150 int8=0.138  delta=-0.012  decrease
+  Qwen2.5-1.5B-Instruct    fp16=0.038 int8=0.038  delta=-0.000  decrease
+  Qwen2.5-3B-Instruct      fp16=0.105 int8=0.038  delta=-0.067  decrease
+  Qwen3-0.6B               fp16=0.276 int8=0.285  delta=+0.009  INCREASE
+  Qwen3-1.7B               fp16=0.096 int8=0.095  delta=-0.002  decrease
+  Qwen3-4B                 fp16=0.042 int8=0.043  delta=+0.001  INCREASE
+  increased(+)=2  decreased(-)=4  mean delta=-0.0118
+  sign test (two-sided) p=0.6875   Wilcoxon z=-0.94 p~=0.3454
+  -> consistent increase? NO ; statistically significant increase? NO
+
+==============================================================================
+PREDICTED-POSITION HISTOGRAMS (fp16 vs nf4)
+==============================================================================
+
+Qwen2.5-0.5B-Instruct:
+  fp16  A: 8.7% B:21.8% C:46.3% D:20.7% E: 2.5%
+        A ### 8.7%
+        B ######### 21.8%
+        C ################### 46.3%
+        D ######## 20.7%
+        E # 2.5%
+  nf4   A:20.7% B:25.7% C:16.3% D:18.0% E:19.3%
+        A ######## 20.7%
+        B ########## 25.7%
+        C ####### 16.3%
+        D ####### 18.0%
+        E ######## 19.3%
+
+Qwen2.5-1.5B-Instruct:
+  fp16  A:15.7% B:19.8% C:24.7% D:24.0% E:15.8%
+        A ###### 15.7%
+        B ######## 19.8%
+        C ########## 24.7%
+        D ########## 24.0%
+        E ###### 15.8%
+  nf4   A:12.5% B:16.0% C:16.5% D:30.7% E:24.3%
+        A ##### 12.5%
+        B ###### 16.0%
+        C ####### 16.5%
+        D ############ 30.7%
+        E ########## 24.3%
+
+Qwen2.5-3B-Instruct:
+  fp16  A:38.8% B:21.0% C: 7.5% D:18.7% E:14.0%
+        A ################ 38.8%
+        B ######## 21.0%
+        C ### 7.5%
+        D ####### 18.7%
+        E ###### 14.0%
+  nf4   A:31.3% B:20.0% C:14.5% D:21.0% E:13.2%
+        A ############# 31.3%
+        B ######## 20.0%
+        C ###### 14.5%
+        D ######## 21.0%
+        E ##### 13.2%
+
+Qwen3-0.6B:
+  fp16  A:74.8% B: 3.2% C: 6.3% D:12.2% E: 3.5%
+        A ############################## 74.8%
+        B # 3.2%
+        C ### 6.3%
+        D ##### 12.2%
+        E # 3.5%
+  nf4   A:98.8% B: 0.0% C: 0.0% D: 1.2% E: 0.0%
+        A ######################################## 98.8%
+        B  0.0%
+        C  0.0%
+        D  1.2%
+        E  0.0%
+
+Qwen3-1.7B:
+  fp16  A:35.7% B:23.0% C:20.5% D:14.0% E: 6.8%
+        A ############## 35.7%
+        B ######### 23.0%
+        C ######## 20.5%
+        D ###### 14.0%
+        E ### 6.8%
+  nf4   A:53.5% B:17.7% C:14.2% D: 9.7% E: 5.0%
+        A ##################### 53.5%
+        B ####### 17.7%
+        C ###### 14.2%
+        D #### 9.7%
+        E ## 5.0%
+
+Qwen3-4B:
+  fp16  A:27.2% B:19.2% C:20.0% D:19.8% E:13.8%
+        A ########### 27.2%
+        B ######## 19.2%
+        C ######## 20.0%
+        D ######## 19.8%
+        E ###### 13.8%
+  nf4   A:27.5% B:16.2% C:21.5% D:20.7% E:14.2%
+        A ########### 27.5%
+        B ###### 16.2%
+        C ######### 21.5%
+        D ######## 20.7%
+        E ###### 14.2%

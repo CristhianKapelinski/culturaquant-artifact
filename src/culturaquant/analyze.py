@@ -74,6 +74,8 @@ def load_preds(out_dir: Path) -> dict:
         with (out_dir / run["preds_file"]).open(encoding="utf-8") as f:
             for line in f:
                 r = json.loads(line)
+                if r.get("_meta"):  # leading provenance line, not an item record
+                    continue
                 rows[r["id"]] = r
         grid[key] = rows
     return {"manifest": manifest, "grid": grid}

@@ -1,0 +1,73 @@
+{
+  "seed": 33,
+  "n_items": 200,
+  "n_proverbs": null,
+  "scoring": "perm_options_v2",
+  "models": [
+    "TucanoBR/Tucano-1b1",
+    "TucanoBR/Tucano-2b4"
+  ],
+  "precisions": [
+    "fp16",
+    "int8",
+    "nf4"
+  ],
+  "reference_machine": {
+    "gpu": "?",
+    "cuda": "?",
+    "torch": "?"
+  },
+  "runs": [
+    {
+      "model": "TucanoBR/Tucano-1b1",
+      "precision": "fp16",
+      "preds_file": "preds__TucanoBR__Tucano-1b1__fp16.jsonl"
+    },
+    {
+      "model": "TucanoBR/Tucano-1b1",
+      "precision": "int8",
+      "preds_file": "preds__TucanoBR__Tucano-1b1__int8.jsonl"
+    },
+    {
+      "model": "TucanoBR/Tucano-1b1",
+      "precision": "nf4",
+      "preds_file": "preds__TucanoBR__Tucano-1b1__nf4.jsonl"
+    },
+    {
+      "model": "TucanoBR/Tucano-2b4",
+      "precision": "fp16",
+      "preds_file": "preds__TucanoBR__Tucano-2b4__fp16.jsonl"
+    },
+    {
+      "model": "TucanoBR/Tucano-2b4",
+      "precision": "int8",
+      "preds_file": "preds__TucanoBR__Tucano-2b4__int8.jsonl"
+    },
+    {
+      "model": "TucanoBR/Tucano-2b4",
+      "precision": "nf4",
+      "preds_file": "preds__TucanoBR__Tucano-2b4__nf4.jsonl"
+    }
+  ],
+  "item_strata": {
+    "by_group": {
+      "cultural": 150,
+      "control": 50
+    },
+    "by_stratum": {
+      "regional_facts": 38,
+      "cuisine": 20,
+      "geography": 12,
+      "generic": 50,
+      "proverbs": 80
+    },
+    "by_region": {
+      "NE": 15,
+      "N": 15,
+      "CO": 13,
+      "SE": 13,
+      "S": 14,
+      "-": 80
+    }
+  }
+}
