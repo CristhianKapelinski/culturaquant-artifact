@@ -23,7 +23,7 @@ REF="$HERE/results/results_macros.tex"
 TMP="$(mktemp)"
 "$PY" "$HERE/analysis/gen_macros.py" "$TMP" >/dev/null
 if diff <(grep newcommand "$TMP" | sort) <(grep newcommand "$REF" | sort) >/dev/null; then
-  echo "OK_MACROS_REPRODUCED (97 macros byte-identical to results/results_macros.tex)"
+  echo "OK_MACROS_REPRODUCED (all macros byte-identical to results/results_macros.tex)"
 else
   echo "MISMATCH: regenerated macros differ from results/results_macros.tex" >&2
   diff <(grep newcommand "$TMP" | sort) <(grep newcommand "$REF" | sort) >&2
