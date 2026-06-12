@@ -5,15 +5,10 @@ __pycache__/
 *.pyc
 .venv/
 
-# Live run outputs and model cache go to the bind-mounted CQ_DATA dir, never the repo.
-out/
+# Model cache goes to the bind-mounted HF cache dir, never the repo.
 data/hf/
 *.log
 
-# Upstream data-build cache (raw Wikidata SPARQL + pageviews responses, re-fetchable via
-# v2/build/fetch.py). A build cache, not a result; never committed.
-v2/cache/
-
-# The committed run of record lives in v2/allband_predictions/ (the all-band 11-model
-# per-item predictions + item metadata) with analysis in v2/build/ and reference macros in
-# v2/allband/, so reviewers can regenerate every paper number without a GPU; keep it tracked.
+# The committed run of record lives in data/predictions/ (the all-band 11-model per-item
+# predictions) with the items in data/items/, the analysis in analysis/, and the reference
+# macros in results/, so reviewers regenerate every paper number with no GPU; keep it tracked.

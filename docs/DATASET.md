@@ -25,8 +25,8 @@ item carries its Wikidata QID and source URL for full provenance, and a `rarity`
 
 | File | Group | Items | Tagging | Notes |
 |---|---|---|---|---|
-| `v2/allband_predictions/cq_cult_items.jsonl` | cultural | 700 | macro-region + rarity band | Rare Brazilian facts drawn from Wikidata: which state a person was born in or a festival happens in. |
-| `v2/allband_predictions/cq_ctrl_items.jsonl` | control | 700 | country + rarity band, `matched_br_id` | Equally rare non-Brazilian facts, one paired to each cultural item on rarity. |
+| `data/items/cultural.jsonl` | cultural | 700 | macro-region + rarity band | Rare Brazilian facts drawn from Wikidata: which state a person was born in or a festival happens in. |
+| `data/items/control.jsonl` | control | 700 | country + rarity band, `matched_br_id` | Equally rare non-Brazilian facts, one paired to each cultural item on rarity. |
 
 Both files are released under the repo's MIT license. The cultural items span the five
 Brazilian macro-regions (N 105, NE 166, CO 113, SE 179, S 137) and seven Wikidata rarity

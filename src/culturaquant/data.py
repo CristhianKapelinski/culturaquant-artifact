@@ -44,65 +44,23 @@ def _read_jsonl(path: Path) -> list[dict]:
         return [json.loads(line) for line in f if line.strip()]
 
 
-def load_cultural_strata(data_dir: Path) -> list[Item]:
-    rows = _read_jsonl(data_dir / "cultural_strata.jsonl")
-    return [
-        Item(
-            id=r["id"],
-            group="cultural",
-            stratum=r["stratum"],
-            region=r["region"],
-            question=r["input"],
-            options=tuple(r["alternatives"]),
-            gold_index=int(r["correct_index"]),
-        )
-        for r in rows
-    ]
+def load_items(path: Path, group: str) -> list[Item]:
+    """Load a JSONL item file into the harmonized schema.
 
-
-def load_control(data_dir: Path) -> list[Item]:
-    rows = _read_jsonl(data_dir / "control_generic.jsonl")
-    return [
-        Item(
-            id=r["id"],
-            group="control",
-            stratum="generic",
-            region="-",
-            question=r["input"],
-            options=tuple(r["alternatives"]),
-            gold_index=int(r["correct_index"]),
-        )
-        for r in rows
-    ]
-
-
-def load_broverbs_proverbs(max_items: int, seed: int) -> list[Item]:
-    """Load the BRoverbs proverb stratum from the HuggingFace Hub.
-
-    We use the ``proverb_to_history`` split (given a proverb, pick the matching
-    short story among 5 options) as the proverbs cultural stratum, subsampled
-    deterministically. Items are tagged region="-" because proverbs are not
-    macro-region localized in BRoverbs.
+    ``group`` is "cultural" or "control". Each row carries the question (``input``),
+    the five ``alternatives``, and the gold ``correct_index``; ``stratum`` and
+    ``region`` are optional (control rows default to stratum "generic", region "-").
     """
-    from datasets import load_dataset
-    import random
-
-    ds = load_dataset("Tropic-AI/BRoverbs", split="proverb_to_history")
-    idx = list(range(len(ds)))
-    random.Random(seed).shuffle(idx)
-    idx = idx[:max_items]
-    items: list[Item] = []
-    for i in idx:
-        row = ds[i]
-        items.append(
-            Item(
-                id=f"prov-{i:04d}",
-                group="cultural",
-                stratum="proverbs",
-                region="-",
-                question=row["input"],
-                options=tuple(row["alternatives"]),
-                gold_index=int(row["correct_index"]),
-            )
+    rows = _read_jsonl(path)
+    return [
+        Item(
+            id=r["id"],
+            group=group,
+            stratum=r.get("stratum", "generic" if group == "control" else "cultural"),
+            region=r.get("region", "-"),
+            question=r["input"],
+            options=tuple(r["alternatives"]),
+            gold_index=int(r["correct_index"]),
         )
-    return items
+        for r in rows
+    ]

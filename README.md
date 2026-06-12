@@ -58,13 +58,13 @@ reported as unmeasurable, not as nulls.
 
 Heavy/GPU work runs the Docker image on a GPU host; growing data (model cache, predictions)
 goes to a bind-mounted directory, never inside the image. The committed run of record lives in
-`v2/allband_predictions/` and needs no GPU to re-analyze.
+`data/predictions/` and needs no GPU to re-analyze.
 
 ## Dependencies
 Managed with **`uv`** (`pyproject.toml` + committed `uv.lock`); the reviewer installs with
 `uv sync` and runs via `uv run`. The GPU-free reproduction needs only the Python standard
 library. Key pins for the scoring path: `torch>=2.5,<2.9`, `transformers>=4.44,<4.57`,
-`bitsandbytes>=0.43,<0.49`, `datasets`, `accelerate`. The cultural probe and the rarity-matched
+`bitsandbytes>=0.43,<0.49`, `accelerate`. The cultural probe and the rarity-matched
 control are author-built JSONL shipped in the repo; no dataset needs manual download.
 
 ## Security concerns
@@ -90,12 +90,12 @@ docker build -t culturaquant:1.0 .                            # ~3 min (cached l
 One command, **no GPU**, <1 min — recomputes the headline from the committed run of record and
 asserts the regenerated macros are byte-identical to the committed reference:
 ```bash
-v2/build/reproduce_allband.sh
+./reproduce.sh
 ```
 Expected tail: the per-model differential-erosion table (pooled int8 `+0.2 pp [-0.4, 0.7]`,
 pooled nf4 `+0.7 pp [-0.1, 1.6]`, MDE `1.8 pp`), the fp16 RStd range `0.120 to 0.198`, and
-`OK_MACROS_REPRODUCED`. The unit tests (`./scripts/test.sh`, `44 passed`) separately exercise
-the scoring, option-shuffle, and statistics helpers.
+`OK_MACROS_REPRODUCED`. The unit tests (`./scripts/test.sh`, `6 passed`) separately exercise
+the constrained-log-likelihood scorer and the per-item option permutation.
 
 ## Experiments
 The MAIN claim is **the 8-bit differential-erosion null on the measurable models**. Default to
@@ -103,19 +103,19 @@ the GPU-free path; the from-scratch grid is an explicit opt-in.
 
 ### Regenerate every paper number from the committed grid (no GPU, <1 min) — recommended
 Re-derives the differential-erosion CIs, the per-band and per-region drops, and the
-position-bias RStd from the committed per-item predictions in `v2/allband_predictions/`, then
-regenerates `v2/allband/results_macros.tex` and checks it byte-for-byte:
+position-bias RStd from the committed per-item predictions in `data/predictions/`, then
+regenerates `results/results_macros.tex` and checks it byte-for-byte:
 ```bash
-v2/build/reproduce_allband.sh
+./reproduce.sh
 ```
 - **Resources:** <1 GB RAM, no GPU, no network.
 - **Expected result:** prints `OK_MACROS_REPRODUCED`; pooled int8 differential **+0.2 pp**
   (95% CI [−0.4, 0.7]), pooled nf4 **+0.7 pp** ([−0.1, 1.6]), MDE **1.8 pp**, 6 of 11 models
   measurable. The individual analyses can also be run directly:
   ```bash
-  python3 v2/build/cq_ci.py            # per-model + pooled differential erosion with CIs
-  python3 v2/build/cq_rstd.py          # position-choice spread (RStd) per measurable model
-  python3 v2/build/cq_full_analysis.py # measurable-set table + per-band/region drops
+  python3 analysis/cq_ci.py            # per-model + pooled differential erosion with CIs
+  python3 analysis/cq_rstd.py          # position-choice spread (RStd) per measurable model
+  python3 analysis/cq_full_analysis.py # measurable-set table + per-band/region drops
   ```
   All three default to the committed predictions; set `CQ_OUT` (plus `CQ_SUB_CULT`,
   `CQ_SUB_CTRL`, `CQ_CULT_ITEMS`, `CQ_CTRL_ITEMS`) to point them at a fresh grid instead.
@@ -123,22 +123,21 @@ v2/build/reproduce_allband.sh
 ### Full reproduction — score the 11-model grid from scratch (GPU, several hours)
 - **Description:** the run of record behind every macro: 11 models × {FP16, int8, NF4} ×
   700 items × 5 cyclic rotations, scored by deterministic constrained log-likelihood.
-- **Execution (on a GPU host):**
+- **Execution (on a GPU host, after `uv sync`):** one command re-scores both groups and then
+  re-runs the analysis:
   ```bash
-  CQ_DATA=$HOME/cq_data ./scripts/run_grid.sh        # writes per-item prediction JSONL
-  CQ_OUT=$CQ_DATA/out CQ_SUB_CULT=<cult-dir> CQ_SUB_CTRL=<ctrl-dir> \
-    python3 v2/build/cq_ci.py                         # analyze the fresh grid
+  ./rescore.sh
   ```
 - **Expected time:** several hours on one 16 GB GPU (plus model downloads on first run).
-- **Expected result:** prediction JSONL matching `v2/allband_predictions/` and, after analysis,
+- **Expected result:** prediction JSONL matching `data/predictions/` and, after analysis,
   the same pooled int8 **+0.2 pp** / nf4 **+0.7 pp** / MDE **1.8 pp**.
 
-Claims map: the released **probe and rarity-matched control** (`v2/allband_predictions/cq_cult_items.jsonl`,
+Claims map: the released **probe and rarity-matched control** (`data/items/cultural.jsonl`,
 `cq_ctrl_items.jsonl`, with `matched_br_id` linking each pair); the **measurable set** (Wilson
 lower bound above the 20% chance floor, `cq_full_analysis.py`); the **8-bit null and 4-bit
 instability** (`cq_ci.py`); **no growth with rarity** and **no region erodes first** (per-band
 and per-region drops in `cq_ci.py`); **position-bias check** (`cq_rstd.py`, provenance in
-`v2/allband/rstd_measurable.json`). The calibration-based quantization methods and the upper
+`results/rstd_measurable.json`). The calibration-based quantization methods and the upper
 deployment band are future work, not run here.
 
 ## License
