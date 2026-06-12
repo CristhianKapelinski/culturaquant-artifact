@@ -25,9 +25,17 @@ c("nfNegModel","Qwen3-1.7B"); c("nfNegVal","-3.6")
 # per-band cultural drop (int8, nf4) - shows no growth with rarity
 c("BandIntMin","-1.0"); c("BandIntMax","1.3")        # int8 flat range
 c("BandNfMin","0.0"); c("BandNfMax","5.9")            # nf4 scattered, not monotone with rarity
-# per-region (int8 ~0)
+# per-band ABSOLUTE cultural accuracy drop (pp), pooled measurable; bands sl0-1..sl51-80
+# (cf. analysis/cq_ci.py "cultural accuracy DROP by rarity band"; counts in results/full_analysis.txt)
+for k,n,vi,vf in zip("abcdefg",[153,150,146,123,78,36,14],
+                     [-0.5,-0.5,0.5,0.4,-0.2,1.3,-1.0],
+                     [1.5,0.0,2.1,3.1,1.5,5.9,3.8]):
+    c("BandN"+k,str(n)); c("BandDInt"+k,"%+.1f"%vi); c("BandDNf"+k,"%+.1f"%vf)
+# per-region ABSOLUTE cultural drop (pp) and item counts
 c("RegIntMin","-0.7"); c("RegIntMax","0.3")
 c("RegNfNNE","+1.1"); c("RegNfCO","-0.1"); c("RegNfSES","+3.2")
+c("RegIntNNE","-0.1"); c("RegIntCO","-0.7"); c("RegIntSES","+0.3")
+c("RegNnne","271"); c("RegNco","113"); c("RegNses","316")
 # at-chance models
 c("chanceModels","Qwen2.5-0.5B, Qwen3-0.6B, Mistral-7B, and both Tucano models")
 # total scored instances = 700 items x 5 cyclic rotations
