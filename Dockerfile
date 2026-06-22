@@ -18,7 +18,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 COPY --from=ghcr.io/astral-sh/uv:0.11.2 /uv /usr/local/bin/uv
 
 WORKDIR /app
-COPY pyproject.toml uv.lock README.md reproduce.sh rescore.sh ./
+COPY pyproject.toml uv.lock README.md reproduce.py reproduce.sh rescore.sh ./
 COPY src ./src
 COPY analysis ./analysis
 COPY data ./data

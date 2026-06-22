@@ -1,7 +1,7 @@
 # Architecture
 
-Complementary detail for reviewers who want it. The top-level `README.md` is
-self-contained and is all that is needed to grant the seals.
+Complementary detail for readers who want it. The top-level `README.md` is
+self-contained; this file just goes deeper on the pipeline.
 
 ## Pipeline
 

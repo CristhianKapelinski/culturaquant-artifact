@@ -1,6 +1,7 @@
 # Dataset internals
 
-Complementary detail. The released probe is the central contribution of the paper.
+Complementary detail. The released probe is the central contribution of the paper;
+this file documents its schema, balance, and scope.
 
 ## Item schema (JSONL, one object per line)
 
