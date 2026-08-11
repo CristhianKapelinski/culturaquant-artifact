@@ -27,4 +27,4 @@ jobs:
         run: uv run pytest tests/ -q
 
       - name: Offline replay from the run of record
-        run: uv run python reproduce.py
+        run: python3 reproduce.py
