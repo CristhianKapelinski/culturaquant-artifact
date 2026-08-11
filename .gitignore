@@ -15,3 +15,6 @@ data/hf/
 # The committed run of record lives in data/predictions/ (the all-band 11-model per-item
 # predictions) with the items in data/items/, the analysis in analysis/, and the reference
 # macros in results/, so reviewers regenerate every paper number with no GPU; keep it tracked.
+
+# graphify knowledge-graph output (local analysis, not part of the artifact)
+graphify-out/
