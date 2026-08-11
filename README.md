@@ -202,7 +202,13 @@ If you use this artifact in your work, please cite the paper:
 > In *Anais do XXII Encontro Nacional de Inteligencia Artificial e Computacional (ENIAC 2026)*. SBC, 2026.
 
 ```bibtex
-@inproceedings{kapelinski2026culturaquant, author = {Cristhian Kapelinski and Dionatan Schmidt and Aline Lunkes and Diego Kreutz}, title = {CulturaQuant: Quantization and Brazilian Cultural Knowledge in Small Language Models}, booktitle = {Anais do XXII Encontro Nacional de Inteligencia Artificial e Computacional (ENIAC 2026)}, year = {2026}, publisher = {SBC} }
+@inproceedings{kapelinski2026culturaquant,
+  author = {Kapelinski, Cristhian and Schmidt, Dionatan and Lunkes, Aline and Kreutz, Diego},
+  title = {{CulturaQuant}: Quantization and {B}razilian Cultural Knowledge in Small Language Models},
+  booktitle = {Anais do XXII Encontro Nacional de Intelig{\^e}ncia Artificial e Computacional (ENIAC 2026)},
+  year = {2026},
+  publisher = {SBC}
+}
 ```
 
 ## License
