@@ -1,0 +1,39 @@
+cff-version: 1.2.0
+message: "If you use the CulturaQuant artifact in your work, please cite the paper listed below."
+type: software
+title: "CulturaQuant: Quantization and Brazilian Cultural Knowledge in Small Language Models"
+authors:
+  - given-names: Cristhian
+    family-names: Kapelinski
+    orcid: "https://orcid.org/0009-0005-5750-022X"
+    affiliation: "AI Horizon Labs, Federal University of Pampa (UNIPAMPA)"
+  - given-names: Dionatan
+    family-names: Schmidt
+    orcid: "https://orcid.org/0009-0006-1453-6860"
+    affiliation: "AI Horizon Labs, Federal University of Pampa (UNIPAMPA)"
+  - given-names: Aline
+    family-names: Lunkes
+    orcid: "https://orcid.org/0000-0002-1846-4853"
+    affiliation: "AI Horizon Labs, Federal University of Pampa (UNIPAMPA)"
+  - given-names: Diego
+    family-names: Kreutz
+    orcid: "https://orcid.org/0000-0003-0830-0238"
+    affiliation: "AI Horizon Labs, Federal University of Pampa (UNIPAMPA)"
+repository-code: "https://github.com/CristhianKapelinski/culturaquant-artifact"
+license: MIT
+url: "https://github.com/CristhianKapelinski/culturaquant-artifact"
+preferred-citation:
+  type: conference-paper
+  title: "CulturaQuant: Quantization and Brazilian Cultural Knowledge in Small Language Models"
+  authors:
+    - given-names: Cristhian
+      family-names: Kapelinski
+    - given-names: Dionatan
+      family-names: Schmidt
+    - given-names: Aline
+      family-names: Lunkes
+    - given-names: Diego
+      family-names: Kreutz
+  year: 2026
+  collection-title: "Anais do XXII Encontro Nacional de Inteligencia Artificial e Computacional (ENIAC 2026)"
+  publisher: SBC

@@ -5,6 +5,9 @@ __pycache__/
 *.pyc
 .venv/
 
+# Temporary cache created by CI/uv runs
+.uv-cache/
+
 # Model cache goes to the bind-mounted HF cache dir, never the repo.
 data/hf/
 *.log

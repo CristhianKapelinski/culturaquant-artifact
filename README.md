@@ -1,8 +1,11 @@
-# CulturaQuant
+# CulturaQuant: Quantization and Brazilian Cultural Knowledge in Small Language Models
 
-*Does quantizing a small language model quietly cost it more Brazilian cultural
-knowledge than generic world knowledge? We set out to catch that erosion in the
-act. This is the lab notebook and the data behind the answer.*
+> Paper: Cristhian Kapelinski, Dionatan Schmidt, Aline Lunkes, Diego Kreutz.
+> *Anais do XXII Encontro Nacional de Inteligencia Artificial e Computacional (ENIAC 2026)*. SBC, 2026.
+
+Does quantizing a small language model quietly cost it more Brazilian cultural
+knowledge than generic world knowledge? This artifact reproduces the measurement
+and the statistical analysis behind the answer.
 
 ## The question
 
@@ -12,8 +15,8 @@ a fraction of the memory. The worry that started this work is that the trade mig
 not be neutral. If a model only barely knows that a given town is in the state of
 Amazonas, that fragile, low-frequency fact could be exactly what gets rounded away
 first when you drop from 16-bit to 8-bit or 4-bit weights. And in Brazilian
-Portuguese, a lot of *cultural* knowledge — who was born where, which festival
-happens in which state — is precisely that kind of rare, long-tail fact.
+Portuguese, a lot of *cultural* knowledge (who was born where, which festival
+happens in which state) is precisely that kind of rare, long-tail fact.
 
 So we asked a sharp version of it: **on identical inputs, does Brazilian cultural
 knowledge erode faster under quantization than equally rare generic world
@@ -22,19 +25,19 @@ than control facts, any extra loss is about rarity, not culture. To rule that ou
 we pair every cultural item with a non-Brazilian item matched on Wikidata rarity,
 and we report **differential erosion**: the cultural-accuracy drop *minus* the
 matched-control drop, in percentage points. A uniform compression hit that lowers
-both equally lands near zero by construction — the design cannot manufacture a
+both equally lands near zero by construction; the design cannot manufacture a
 "culture erodes first" headline out of a flat drop.
 
 ## How it works
 
 Each item is a single-correct, five-way multiple-choice question (random floor
-0.20). We score every model at three precisions — FP16, bitsandbytes int8, and NF4
-4-bit — with deterministic constrained log-likelihood (argmax over the option
+0.20). We score every model at three precisions (FP16, bitsandbytes int8, and NF4
+4-bit) with deterministic constrained log-likelihood (argmax over the option
 log-probabilities, no sampling), rotating the five options cyclically so the gold
 answer is never pinned to one slot. That scoring step is the only part that needs a
 GPU, and it produces the **run of record**: one JSONL of per-item predictions per
-(model, precision), committed here in `data/predictions/`. Everything downstream —
-the erosion, the confidence intervals, the null — is pure Python standard library
+(model, precision), committed here in `data/predictions/`. Everything downstream
+(the erosion, the confidence intervals, the null) is pure Python standard library
 reading those JSONLs back, which is what makes the headline auditable on any laptop.
 
 ```mermaid
@@ -83,7 +86,7 @@ pooled int8 differential is **+0.2 pp** with a 95% item-clustered bootstrap CI o
 detectable effect is about **1.8 pp**, so this is a powered null, not silence. In
 plain terms: **int8 is culturally safe.**
 
-Four-bit (NF4) is the more interesting non-story. It is not a larger cultural loss —
+Four-bit (NF4) is the more interesting non-story. It is not a larger cultural loss;
 it is *model-specific and unstable*. The pooled nf4 differential is **+0.7 pp**
 ([−0.1, 1.6]), but the per-model signs openly disagree: the three Qwen2.5 models
 erode cultural knowledge faster by **3.1–3.5 pp**, Qwen3-1.7B erodes it *slower* by
@@ -101,12 +104,12 @@ does **not** grow monotonically with rarity band (int8 stays flat across all sev
 bands; nf4 is scattered, not increasing), and **no Brazilian macro-region erodes
 first** (the North/Northeast vs Southeast/South contrast is within noise). Full-
 precision accuracy *does* climb smoothly with item frequency (21% on the rarest band
-to 52% on the most common), which is a sanity check that the probe measures knowledge —
-that gradient just doesn't translate into a quantization-induced cultural penalty.
+to 52% on the most common), which is a sanity check that the probe measures knowledge.
+That gradient just does not translate into a quantization-induced cultural penalty.
 
 ## Reproduce it yourself
 
-One command, **no GPU, no network, no install** — it re-analyzes the committed
+One command, **no GPU, no network, no install**: it re-analyzes the committed
 predictions, prints all the tables above, and then asserts the regenerated LaTeX
 macros are byte-identical to the committed reference:
 
@@ -149,7 +152,7 @@ cell if you would rather read the numbers interactively.
 
 ## The data
 
-The run of record lives in `data/predictions/` — **66 JSONL files** (11 models × 3
+The run of record lives in `data/predictions/`: **66 JSONL files** (11 models x 3
 precisions × 2 groups), each with 3,500 lines (700 items × 5 cyclic rotations).
 Every prediction line records the item id, the rotation, the gold and predicted
 option, whether it was correct, and the five option log-probabilities, so the scoring
@@ -190,7 +193,19 @@ data (model cache, predictions) is bind-mounted, never baked into the image. The
 tests for the scorer and the option-permutation logic run with `./scripts/test.sh`
 (no GPU needed).
 
+## Citation
+
+If you use this artifact in your work, please cite the paper:
+
+> Cristhian Kapelinski, Dionatan Schmidt, Aline Lunkes, and Diego Kreutz.
+> **CulturaQuant: Quantization and Brazilian Cultural Knowledge in Small Language Models.**
+> In *Anais do XXII Encontro Nacional de Inteligencia Artificial e Computacional (ENIAC 2026)*. SBC, 2026.
+
+```bibtex
+@inproceedings{kapelinski2026culturaquant, author = {Cristhian Kapelinski and Dionatan Schmidt and Aline Lunkes and Diego Kreutz}, title = {CulturaQuant: Quantization and Brazilian Cultural Knowledge in Small Language Models}, booktitle = {Anais do XXII Encontro Nacional de Inteligencia Artificial e Computacional (ENIAC 2026)}, year = {2026}, publisher = {SBC} }
+```
+
 ## License
 
-MIT — see `LICENSE`. The probe, the control, and the predictions are all released
+MIT; see `LICENSE`. The probe, the control, and the predictions are all released
 under it.
