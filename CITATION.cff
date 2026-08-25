@@ -19,9 +19,9 @@ authors:
     family-names: Kreutz
     orcid: "https://orcid.org/0000-0003-0830-0238"
     affiliation: "AI Horizon Labs, Federal University of Pampa (UNIPAMPA)"
-repository-code: "https://github.com/CristhianKapelinski/culturaquant-artifact"
+repository-code: "https://gitlab.com/cristhianavila.aluno/culturaquant-artifact"
 license: MIT
-url: "https://github.com/CristhianKapelinski/culturaquant-artifact"
+url: "https://gitlab.com/cristhianavila.aluno/culturaquant-artifact"
 preferred-citation:
   type: conference-paper
   title: "CulturaQuant: Quantization and Brazilian Cultural Knowledge in Small Language Models"
