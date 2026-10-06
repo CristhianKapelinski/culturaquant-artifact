@@ -36,4 +36,5 @@ preferred-citation:
       family-names: Kreutz
   year: 2026
   collection-title: "Anais do XXII Encontro Nacional de Inteligência Artificial e Computacional (ENIAC 2026)"
-  publisher: SBC
+  publisher:
+    name: "Sociedade Brasileira de Computação (SBC)"
