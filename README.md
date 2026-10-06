@@ -1,7 +1,7 @@
 # CulturaQuant: Quantization and Brazilian Cultural Knowledge in Small Language Models
 
 > Paper: Cristhian Kapelinski, Dionatan Schmidt, Aline Lunkes, Diego Kreutz.
-> *Anais do XXII Encontro Nacional de Inteligencia Artificial e Computacional (ENIAC 2026)*. SBC, 2026.
+> *Anais do XXIII Encontro Nacional de Inteligencia Artificial e Computacional (ENIAC 2026)*. SBC, 2026.
 
 Does quantizing a small language model quietly cost it more Brazilian cultural
 knowledge than generic world knowledge? This artifact reproduces the measurement
@@ -199,13 +199,13 @@ If you use this artifact in your work, please cite the paper:
 
 > Cristhian Kapelinski, Dionatan Schmidt, Aline Lunkes, and Diego Kreutz.
 > **CulturaQuant: Quantization and Brazilian Cultural Knowledge in Small Language Models.**
-> In *Anais do XXII Encontro Nacional de Inteligencia Artificial e Computacional (ENIAC 2026)*. SBC, 2026.
+> In *Anais do XXIII Encontro Nacional de Inteligencia Artificial e Computacional (ENIAC 2026)*. SBC, 2026.
 
 ```bibtex
 @inproceedings{kapelinski2026culturaquant,
   author = {Kapelinski, Cristhian and Schmidt, Dionatan and Lunkes, Aline and Kreutz, Diego},
   title = {{CulturaQuant}: Quantization and {B}razilian Cultural Knowledge in Small Language Models},
-  booktitle = {Anais do XXII Encontro Nacional de Intelig{\^e}ncia Artificial e Computacional (ENIAC 2026)},
+  booktitle = {Anais do XXIII Encontro Nacional de Intelig{\^e}ncia Artificial e Computacional (ENIAC 2026)},
   year = {2026},
   publisher = {SBC}
 }
